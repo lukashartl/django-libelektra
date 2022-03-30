@@ -1,0 +1,14 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test_spec:
+    runs-on: ubuntu-latest
+    container:
+      image: elektra/elektra:0.9.9-6-bullseye
+      options: -u root
+    steps:
+      - uses: actions/checkout@v3
