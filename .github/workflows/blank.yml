@@ -11,3 +11,6 @@ jobs:
       options: -u root
     steps:
       - uses: actions/checkout@v3
+      - run: "cd ${GITHUB_WORKSPACE}/spec && ./create-spec.sh"
+      - run: "cd ${GITHUB_WORKSPACE}/spec && ./test-spec.sh"
+
