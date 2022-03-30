@@ -65,3 +65,4 @@ kdb meta-set spec:$CURRENT_PATH/csrf_origins array ''
 kdb meta-set spec:$CURRENT_PATH/csrf_origins/\# type string
 kdb meta-set spec:$CURRENT_PATH/csrf_origins/\# fallback/\#0 "${CURRENT_PATH}/allowed_hosts/#0"
 
+sudo kdb umount spec:$CURRENT_PATH
