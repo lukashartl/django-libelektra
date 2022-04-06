@@ -4,7 +4,7 @@ set -ex
 
 CURRENT_PATH=/sw/django/\#0/current
 
-sudo kdb mount `pwd`/django.spec.ni spec:$CURRENT_PATH ni
+sudo kdb mount django.spec.ni spec:$CURRENT_PATH ni
 kdb meta-set spec:$CURRENT_PATH mountpoint django.spec.ni
 
 # DEBUG
