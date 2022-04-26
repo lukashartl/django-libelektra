@@ -1,0 +1,6 @@
+/db.sqlite3
+/my_cool_db.sqlite3
+
+/venv/
+
+*.pyc
