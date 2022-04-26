@@ -28,3 +28,4 @@ jobs:
       - run: "apt install -y python3-venv"
       - run: "python3 -m venv venv"
       - run: "./venv/bin/pip install -r requirements.txt"
+      - run: "${GITHUB_WORKSPACE}/spec/test-spec.sh"
