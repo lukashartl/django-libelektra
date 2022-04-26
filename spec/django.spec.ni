@@ -18,7 +18,7 @@ csrf_origins =
 databases/#/password = 
 
 [databases]
- meta:/array = #0
+ meta:/array = 
 
 [csrf_origins/#]
  meta:/type = string

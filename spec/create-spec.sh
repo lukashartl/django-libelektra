@@ -2,9 +2,10 @@
 
 set -ex
 
+SPEC_PATH=$(dirname $(realpath $0))
 CURRENT_PATH=/sw/django/\#0/current
 
-sudo kdb mount django.spec.ni spec:$CURRENT_PATH ni
+sudo kdb mount "${SPEC_PATH}/django.spec.ni" spec:$CURRENT_PATH ni
 kdb meta-set spec:$CURRENT_PATH mountpoint django.spec.ni
 
 # DEBUG
