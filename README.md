@@ -28,7 +28,7 @@ Specification for Django's settings can be found [here](https://docs.djangoproje
 
 1. Mount specification and apply test data: `./spec/test-spec.sh`
 2. Create venv and install requirements:
-   1. `python3 -m venv venv`
+   1. `python3 -m venv venv --system-site-packages`
    2. `./venv/bin/pip install -r requirements.txt`
 3. Migrate data `./venv/bin/python3 manage.py migrate`
 4. Run server: `./venv/bin/python3 manage.py runserver`
