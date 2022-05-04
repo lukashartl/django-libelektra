@@ -18,30 +18,50 @@ from pathlib import Path
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1s1nfv59%b(rs2jy_+xod8w@t=l9pu$-ex^@ef*x@p6l=udszj'
+SECRET_KEY = "django-insecure-1s1nfv59%b(rs2jy_+xod8w@t=l9pu$-ex^@ef*x@p6l=udszj"
+
+
+def __elektra_get_highest_idx(k: kdb.Key) -> int:
+    count = k.getMeta("array").value
+    return int(str(count).replace("#", "").replace("_", ""))
+
+
+def elektra_key_generator(x: int):
+    for i in range(0, x + 1):
+        yield f"#{(len(str(i)) - 1) * '_'}{i}"
+
+
+def elektra_get_child_key_names(k: kdb.Key) -> int:
+    count = __elektra_get_highest_idx(k)
+
+    for x in elektra_key_generator(count):
+        yield f"{k.name}/{x}"
 
 
 # Configure via LibElektra
 with kdb.KDB() as k:
     ks = kdb.KeySet()
-    k.get(ks, 'user:/sw/django/#0/current')
-    database_count = ks['user:/sw/django/#0/current/databases'].getMeta('array').value
+    k.get(ks, "/sw/django/#0/current")
 
-    DEBUG = True if ks['/sw/django/#0/current/debug'].get() else False
-    ALLOWED_HOSTS = [x.value for x in ks if '/sw/django/#0/current/allowed_hosts/' in x.name]
-    CSRF_TRUSTED_ORIGINS = [x.value for x in ks if '/sw/django/#0/current/csrf_origins/' in x.name]
+    DEBUG = True if ks["/sw/django/#0/current/debug"].get() else False
 
-    DATABASES = {
-        x.value: {
-            'ENGINE': ks[f"{x}/engine"].value,
-            'NAME': ks[f"{x}/name"].value,
-            'USER': ks[f"{x}/user"].value,
-            'PASSWORD': ks[f"{x}/password"].value,
-            'PORT': ks[f"{x}/port"].value,
-        } for x in ks if '/sw/django/#0/current/databases/' in x.name and len(x) == 7
-    }
+    # Lists
+    ALLOWED_HOSTS = [ks[key].value for key in elektra_get_child_key_names(ks["/sw/django/#0/current/allowed_hosts/"])]
+    CSRF_TRUSTED_ORIGINS = [
+        ks[key].value for key in elektra_get_child_key_names(ks["/sw/django/#0/current/csrf_origins/"])
+    ]
+    INSTALLED_APPS = [ks[key].value for key in elektra_get_child_key_names(ks["/sw/django/#0/current/apps/"])]
 
-    INSTALLED_APPS = [x.value for x in ks if '/sw/django/#0/current/apps/' in x.name]
+    DATABASES = {}
+
+    for keyname in elektra_get_child_key_names(ks["/sw/django/#0/current/databases/"]):
+        DATABASES[ks[keyname].value] = {
+            "ENGINE": ks[f"{keyname}/engine"].value,
+            "NAME": ks[f"{keyname}/name"].value,
+            "USER": ks[f"{keyname}/user"].value,
+            "PASSWORD": ks[f"{keyname}/password"].value,
+            "PORT": ks[f"{keyname}/port"].value,
+        }
 
 # Application definition
 
