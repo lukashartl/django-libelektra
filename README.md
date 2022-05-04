@@ -2,6 +2,12 @@
 
 This repository is my homework for the university lecture "194.030 Configuration Management" at TU Wien.
 
+## What is this?
+
+This is a proof of concept for "elektrify" Django.
+
+This Django Project uses [libelektra](https://github.com/ElektraInitiative/libelektra) for storing it's settings.
+
 ## Specification (HW1)
 
 An elektra-specification for the most important Django settings can be found in `spec/django.spec.ni`:
@@ -70,7 +76,9 @@ Since this is a very generic python project, installation is very easy:
 
 ### Testing
 
-Open <http://127.0.0.1:8000> in your browser.
+Open <http://127.0.0.1:8000> in your browser for the hello world page, or <http://127.0.0.1:8000/admin> for the admin console.
+
+If you want to access django admin, you have to create a superuser first: `python manage.py createsuperuser`.
 
 ### Need Help for HW3?
 
