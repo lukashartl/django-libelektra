@@ -71,3 +71,7 @@ Since this is a very generic python project, installation is very easy:
 ### Testing
 
 Open <http://127.0.0.1:8000> in your browser.
+
+### Need Help for HW3?
+
+You'll find my contact data in the private `cm2022s` repository.
