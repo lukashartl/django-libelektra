@@ -11,11 +11,13 @@ sudo kdb spec-mount $CURRENT_PATH ni
 kdb set user:$CURRENT_PATH/debug 1
 test $(kdb get user:$CURRENT_PATH/debug) == 1
 
-kdb meta-set user:$CURRENT_PATH/allowed_hosts array '#0'
+kdb meta-set user:$CURRENT_PATH/allowed_hosts array '#2'
 kdb set user:$CURRENT_PATH/allowed_hosts/\#0 'localhost'
+kdb set user:$CURRENT_PATH/allowed_hosts/\#1 '127.0.0.1'
+kdb set user:$CURRENT_PATH/allowed_hosts/\#2 'proxy.localhost'
 
 kdb meta-set user:$CURRENT_PATH/csrf_origins array '#0'
-test $(kdb get $CURRENT_PATH/csrf_origins/\#0) == 'localhost'
+kdb set user:$CURRENT_PATH/csrf_origins/\#0 'http://localhost'
 
 kdb meta-set user:$CURRENT_PATH/databases array '#0'
 kdb set user:$CURRENT_PATH/databases/\#0 'default'
