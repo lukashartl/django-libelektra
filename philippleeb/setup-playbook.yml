@@ -1,0 +1,10 @@
+- name: elektra module example
+  hosts: localhost
+  connection: local
+  collections:
+    - elektra_initiative.libelektra
+  tasks:
+    - name: creates directory
+      file:
+        path: ~/django-libelektra
+        state: directory
