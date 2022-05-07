@@ -83,3 +83,12 @@ If you want to access django admin, you have to create a superuser first: `pytho
 ### Need Help for HW3?
 
 You'll find my contact data in the private `cm2022s` repository.
+
+## Ansible Setup (HW3 - Philipp Leeb)
+
+### Installation
+
+1. install ansible:  
+    ```sh
+    ./venv/bin/pip install ansible
+    ```
