@@ -88,7 +88,28 @@ You'll find my contact data in the private `cm2022s` repository.
 
 ### Installation
 
-1. install ansible:  
+1. Install ansible:  
+
     ```sh
-    ./venv/bin/pip install ansible
+    pip3 install ansible
+    ```
+
+### Running
+
+1. Run playbook:
+
+    ```sh
+    ansible-playbook philippleeb/setup-playbook.yml --ask-become-pass
+    ```
+
+2. Move to the directory:
+
+    ```sh
+    cd ~/django-libelektra
+    ```
+
+3. Run application:
+
+    ```sh
+    ./venv/bin/python3 manage.py runserver
     ```
