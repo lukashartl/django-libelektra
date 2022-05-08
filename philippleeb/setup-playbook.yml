@@ -20,3 +20,16 @@
        virtualenv: ~/django-libelektra/venv
        virtualenv_command: python3 -m venv
        virtualenv_site_packages: true
+    - name: check kdb mounts
+      shell:
+        cmd: kdb mount
+      register: mounts
+    - name: mount and configure
+      shell:
+        cmd: ./spec/test-spec.sh
+        chdir: ~/django-libelektra
+      when: mounts.stdout.find('/sw/django/#0/current') == -1 and mounts.stdout.find('spec:/sw/django/#0/current') == -1
+    - name: setup db
+      shell:
+        cmd: ./venv/bin/python3 manage.py migrate
+        chdir: ~/django-libelektra
