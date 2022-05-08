@@ -113,3 +113,31 @@ You'll find my contact data in the private `cm2022s` repository.
     ```sh
     ./venv/bin/python3 manage.py runserver
     ```
+
+### Properties
+
+#### Idempotence
+
+Is guaranteed by ansible for all inbuilt functions and the scripts also only use idempotent functions (for example: KDB set).
+The mount is checked in the playbook as well so that the mount setup is only done if it does not exist.
+
+#### Only partial changes
+
+This is by default done by ansible inbuilt functions. The same conzept is implemented with the "check kdb mounts", where the mounts are only executed, if they do not exist.
+
+#### Self description
+
+The titles of the tasks should give a brief idea what is done by them.
+
+#### Round tripping
+
+This is guaranteed by the kdb commands which are used in the shell-script.
+
+#### Error handling
+
+Ansible handles errors by stopping the specified chain, if there are critical failures.
+In the case of mounts, the "check kdb mounts" task prevents errors in the "mount and configure" task.
+
+## Issues while developing
+
+- Wrong python version which was not compatible with the setup (3.10) -> Downgrade to python 3.9
