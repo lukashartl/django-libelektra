@@ -8,3 +8,15 @@
       file:
         path: ~/django-libelektra
         state: directory
+    - name: clone github repository
+      git:
+        repo: https://github.com/lukashartl/django-libelektra.git
+        dest: ~/django-libelektra
+        clone: yes
+        update: yes
+    - name: create venv
+      pip:
+       requirements: ~/django-libelektra/requirements.txt
+       virtualenv: ~/django-libelektra/venv
+       virtualenv_command: python3 -m venv
+       virtualenv_site_packages: true
